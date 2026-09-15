@@ -1,0 +1,11 @@
+Medicine,Stock,Daily_Usage,Lead_Time_Days,Safety_Stock
+Amoxicillin,420,55,5,120
+Paracetamol,680,82,7,180
+Insulin,210,18,10,90
+Azithromycin,360,34,6,80
+ORS,900,95,4,250
+Metformin,520,42,8,130
+Cefixime,240,30,6,75
+Ibuprofen,460,48,5,100
+Doxycycline,310,38,7,90
+Salbutamol,190,24,9,70
