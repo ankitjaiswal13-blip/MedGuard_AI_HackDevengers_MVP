@@ -1,6 +1,27 @@
+# Python
 node_modules/
 dist/
 .venv/
 __pycache__/
 *.pyc
 .env
+
+# Python virtualenvs (alternate names)
+venv/
+env/
+ENV/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Vite / npm build artifacts
+.vite/
+*.log
+npm-debug.log*
+
+# CSV temp files created by the atomic-write in main.py
+*.tmp
+backend/data/*.tmp
