@@ -7,6 +7,7 @@
 MedGuard AI is a national-scale health resource management platform for Primary Health Centre (PHC) networks. It provides real-time visibility into medicine stocks, bed availability, and medical personnel attendance — with ML-based demand forecasting, early stock-out warnings, and automated cross-district redistribution recommendations.
 
 Built for **Track 3 — Smart Health & Supply Chain Resilience** at **Hack Devengers 2.0** (BRICS Theme: Resilience).
+![MedGuard AI Dashboard](screenshot.png)
 ---
 
 ## 🚀 Problem Statement
@@ -47,15 +48,15 @@ Cross-District Redistribution
 The track calls for a federated platform providing real-time visibility into medicine stocks, bed availability, and medical personnel attendance across a national PHC network, with demand forecasting, early stock-out warnings, and automated cross-district redistribution.
 
 Requirement	Status	Where
-Real-time medicine stock visibility	✅ Implemented	GET /api/inventory
-Real-time bed availability	✅ Implemented	GET /api/beds
-Personnel attendance tracking	✅ Implemented	GET /api/staff
-Multi-facility network view	✅ Implemented	GET /api/facilities
-Demand forecasting	✅ Implemented	GET /api/forecast/{medicine}
-Early stock-out warnings	✅ Implemented	Risk levels (Critical/High/Medium/Low)
-Cross-district redistribution	✅ Implemented	GET /api/redistribution
-Federated learning across BRICS	🚧 Future scope	Model designed to train locally per facility
-Patient footfall tracking	🚧 Future scope	Not in MVP
+Real-time medicine stock visibility 	✅ Implemented	GET /api/inventory
+Real-time bed availability	          ✅ Implemented	GET /api/beds
+Personnel attendance tracking	        ✅ Implemented	GET /api/staff
+Multi-facility network view	          ✅ Implemented	GET /api/facilities
+Demand forecasting	                  ✅ Implemented	GET /api/forecast/{medicine}
+Early stock-out warnings	            ✅ Implemented	Risk levels (Critical/High/Medium/Low)
+Cross-district redistribution	        ✅ Implemented	GET /api/redistribution
+Federated learning across BRICS	      🚧 Future scope Model designed to train locally per facility
+Patient footfall tracking	            🚧 Future scope Not in MVP
 ✨ Key Features
 🏥 Multi-Facility Network
 Supports multiple PHCs with independent stock, capacity, and staffing
