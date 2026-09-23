@@ -1,0 +1,9 @@
+facility_id,facility_name,district,role,present,total
+PHC-001,Saket PHC,South Delhi,Doctor,3,5
+PHC-001,Saket PHC,South Delhi,Nurse,8,12
+PHC-001,Saket PHC,South Delhi,Pharmacist,1,2
+PHC-002,Dwarka PHC,West Delhi,Doctor,2,4
+PHC-002,Dwarka PHC,West Delhi,Nurse,5,10
+PHC-003,Rohini PHC,North West Delhi,Doctor,5,5
+PHC-003,Rohini PHC,North West Delhi,Nurse,11,12
+PHC-003,Rohini PHC,North West Delhi,Pharmacist,2,2
