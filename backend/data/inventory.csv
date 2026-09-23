@@ -1,10 +1,18 @@
-name,category,quantity,daily_usage,reorder_level,expiry_date
-Paracetamol 500mg,Analgesic,120,45.0,100,2027-02-15
-Amoxicillin 250mg,Antibiotic,300,18.0,80,2027-05-10
-Insulin Glargine,Diabetes,45,8.0,30,2026-12-20
-Azithromycin 500mg,Antibiotic,75,15.0,60,2027-01-25
-ORS Sachet,Rehydration,500,35.0,150,2027-08-01
-Atorvastatin 20mg,Cardiovascular,210,12.0,60,2027-03-18
-Salbutamol Inhaler,Respiratory,28,6.0,25,2026-11-30
-Metformin 500mg,Diabetes,180,14.0,70,2027-06-12
-Paracetamol 250mg,Tablet,100,10.0,20,2027-12-31
+facility_id,facility_name,district,name,category,quantity,daily_usage,reorder_level,expiry_date
+PHC-001,Saket PHC,South Delhi,Paracetamol 500mg,Analgesic,120,45.0,100,2027-02-15
+PHC-001,Saket PHC,South Delhi,Amoxicillin 250mg,Antibiotic,300,18.0,80,2027-05-10
+PHC-001,Saket PHC,South Delhi,Insulin Glargine,Diabetes,45,8.0,30,2026-12-20
+PHC-001,Saket PHC,South Delhi,Azithromycin 500mg,Antibiotic,75,15.0,60,2027-01-25
+PHC-001,Saket PHC,South Delhi,ORS Sachet,Rehydration,500,35.0,150,2027-08-01
+PHC-001,Saket PHC,South Delhi,Atorvastatin 20mg,Cardiovascular,210,12.0,60,2027-03-18
+PHC-001,Saket PHC,South Delhi,Salbutamol Inhaler,Respiratory,28,6.0,25,2026-11-30
+PHC-001,Saket PHC,South Delhi,Metformin 500mg,Diabetes,180,14.0,70,2027-06-12
+PHC-001,Saket PHC,South Delhi,Paracetamol 250mg,Tablet,100,10.0,20,2027-12-31
+PHC-002,Dwarka PHC,West Delhi,Paracetamol 500mg,Analgesic,40,45.0,100,2027-02-15
+PHC-002,Dwarka PHC,West Delhi,Amoxicillin 250mg,Antibiotic,180,18.0,80,2027-05-10
+PHC-002,Dwarka PHC,West Delhi,Insulin Glargine,Diabetes,15,8.0,30,2026-12-20
+PHC-002,Dwarka PHC,West Delhi,ORS Sachet,Rehydration,220,35.0,150,2027-08-01
+PHC-003,Rohini PHC,North West Delhi,Paracetamol 500mg,Analgesic,300,45.0,100,2027-02-15
+PHC-003,Rohini PHC,North West Delhi,Amoxicillin 250mg,Antibiotic,450,18.0,80,2027-05-10
+PHC-003,Rohini PHC,North West Delhi,Insulin Glargine,Diabetes,60,8.0,30,2026-12-20
+PHC-003,Rohini PHC,North West Delhi,Metformin 500mg,Diabetes,250,14.0,70,2027-06-12
