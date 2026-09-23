@@ -7,6 +7,8 @@
 MedGuard AI is a national-scale health resource management platform for Primary Health Centre (PHC) networks. It provides real-time visibility into medicine stocks, bed availability, and medical personnel attendance — with ML-based demand forecasting, early stock-out warnings, and automated cross-district redistribution recommendations.
 
 Built for **Track 3 — Smart Health & Supply Chain Resilience** at **Hack Devengers 2.0** (BRICS Theme: Resilience).
+
+
 ![MedGuard AI Dashboard](screenshot.png)
 ---
 
