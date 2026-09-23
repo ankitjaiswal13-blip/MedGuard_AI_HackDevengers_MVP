@@ -1,158 +1,152 @@
 # 🏥 MedGuard AI
 
-### AI-Powered Medicine Inventory & Demand Forecasting System
+### National Health Resource & Supply Chain Intelligence
 
 > **Predict. Prevent. Protect.**
 
-MedGuard AI is an intelligent medicine inventory management system designed to help hospitals, pharmacies, and healthcare inventory managers monitor medicine stock, identify inventory risks, forecast future demand, and make smarter reorder decisions.
+MedGuard AI is a national-scale health resource management platform for Primary Health Centre (PHC) networks. It provides real-time visibility into medicine stocks, bed availability, and medical personnel attendance — with ML-based demand forecasting, early stock-out warnings, and automated cross-district redistribution recommendations.
 
+Built for **Track 3 — Smart Health & Supply Chain Resilience** at **Hack Devengers 2.0** (BRICS Theme: Resilience).
 ---
 
 ## 🚀 Problem Statement
 
-Medicine inventory management is often dependent on manual tracking and basic stock-level monitoring.
+Public healthcare systems across developing nations face persistent supply chain vulnerabilities:
 
-This can lead to:
+- ❌ No real-time visibility into medicine stocks across a distributed PHC network
+- ❌ Unexplained stock-outs during demand spikes or health emergencies
+- ❌ Overstocking and expiry wastage in facilities with surplus
+- ❌ No coordination between districts to redistribute surplus to deficit areas
+- ❌ Bed capacity and personnel attendance tracked separately, if at all
 
-- ❌ Unexpected medicine stock-outs
-- ❌ Overstocking and unnecessary expenses
-- ❌ Medicine expiry and wastage
-- ❌ Difficulty predicting future demand
-- ❌ Slow and inefficient inventory decisions
-
-MedGuard AI addresses these challenges using inventory analytics and machine-learning-based demand forecasting.
+MedGuard AI addresses these challenges with a unified, federated-ready platform that any PHC network can deploy.
 
 ---
 
 ## 💡 Our Solution
 
-MedGuard AI provides a centralized dashboard that converts inventory data into actionable recommendations.
+A centralized dashboard + API that converts inventory, capacity, and staffing data into actionable national-scale recommendations.
 
 ### Core workflow
 
 ```text
-Medicine Inventory
-       ↓
-Inventory Analysis
-       ↓
-Risk Detection
-       ↓
-Demand Forecasting
-       ↓
-Smart Reorder Recommendation
-       ↓
-Better Inventory Decisions
+Facility Data (Medicines, Beds, Staff)
+              ↓
+      Real-Time Aggregation
+              ↓
+   Risk Detection (per facility)
+              ↓
+      Demand Forecasting
+              ↓
+  Early Stock-Out Warnings
+              ↓
+Cross-District Redistribution
+              ↓
+    Better Health Outcomes
+🎯 Alignment with Track 3 — Smart Health & Supply Chain Resilience
+The track calls for a federated platform providing real-time visibility into medicine stocks, bed availability, and medical personnel attendance across a national PHC network, with demand forecasting, early stock-out warnings, and automated cross-district redistribution.
+
+Requirement	Status	Where
+Real-time medicine stock visibility	✅ Implemented	GET /api/inventory
+Real-time bed availability	✅ Implemented	GET /api/beds
+Personnel attendance tracking	✅ Implemented	GET /api/staff
+Multi-facility network view	✅ Implemented	GET /api/facilities
+Demand forecasting	✅ Implemented	GET /api/forecast/{medicine}
+Early stock-out warnings	✅ Implemented	Risk levels (Critical/High/Medium/Low)
+Cross-district redistribution	✅ Implemented	GET /api/redistribution
+Federated learning across BRICS	🚧 Future scope	Model designed to train locally per facility
+Patient footfall tracking	🚧 Future scope	Not in MVP
 ✨ Key Features
-📦 Inventory Management
-Track important information for every medicine:
+🏥 Multi-Facility Network
+Supports multiple PHCs with independent stock, capacity, and staffing
 
-Medicine name
+Filter the entire dashboard by facility or view the national aggregate
 
-Category
+Each facility has a facility_id, facility_name, and district
 
-Current quantity
+📦 Medicine Inventory Management
+Track per medicine, per facility:
 
-Daily usage
+Name, category, current quantity, daily usage, reorder level, expiry date
 
-Reorder level
+Computed: days of stock remaining, recommended reorder quantity
 
-Expiry date
+⚠️ Risk Detection
+Every medicine is classified automatically:
 
-⚠️ Inventory Risk Detection
-MedGuard AI analyzes current inventory and identifies medicines requiring attention.
+🔴 Critical — under 3 days of stock, or below reorder level
 
-Risk levels include:
+🟠 High — under 7 days, or below 1.5× reorder level
 
-🟢 Low
+🟡 Medium — under 14 days
 
-🟡 Medium
+🟢 Low — healthy stock
 
-🟠 High
+🛏️ Bed Availability
+Per-facility total, occupied, and available beds
 
-🔴 Critical
+Occupancy percentage with automatic status:
+
+🔴 Critical at ≥95% occupancy
+
+🟠 High at ≥80%
+
+🟢 Normal below 80%
+
+👩‍⚕️ Personnel Attendance
+Staff tracked by facility and role (Doctor, Nurse, Pharmacist)
+
+Attendance percentage with automatic status:
+
+🔴 Critical below 60%
+
+🟠 Low below 80%
+
+🟢 Normal at 80%+
 
 🤖 AI Demand Forecasting
-The system generates a 7-day demand forecast for individual medicines.
+7-day rolling forecast per medicine per facility
 
-The forecast provides:
+Uses Random Forest Regression on synthetic historical demand for the MVP
 
-Current stock
+Returns predicted daily demand, total demand, and recommended order quantity
 
-Predicted daily demand
+🔁 Cross-District Redistribution
+The platform's most distinctive feature — automatic recommendations to move stock between facilities:
 
-Predicted 7-day demand
+Deficit = a facility with fewer than 7 days of stock of a medicine
 
-Recommended order quantity
+Surplus = a facility with more than 21 days of stock of the same medicine
 
-🛒 Smart Reorder Recommendation
-Instead of simply saying that stock is low, MedGuard AI recommends how many units should be ordered.
+Transfer = enough units to bring the deficit facility to a 14-day buffer, capped at the surplus facility's spare capacity above its own 21-day buffer
 
-Example:
+Each recommendation includes the source facility, destination facility, medicine, transfer units, and a human-readable justification.
 
-text
-Medicine: Paracetamol 500mg
-
-Current Stock:        120 units
-Predicted Demand:     183.5 units
-Recommended Order:     64 units
-Risk:                  Critical
 📊 Interactive Dashboard
-The dashboard provides a quick overview of:
+National summary cards (medicines, critical count, high-risk count, expiring)
 
-Total medicines
+Facility filter (dropdown) that re-scopes inventory + cards
 
-Critical medicines
+Sortable inventory table with risk badges and recommendations
 
-High-risk medicines
+Side-by-side bed and staff tables
 
-Expiring medicines
+Redistribution panel that highlights transfers targeting the selected facility
 
-Inventory risk
-
-Reorder recommendations
-
-Demand forecasts
+Graceful error handling: backend down → visible error banner → Retry button
 
 🧠 AI / ML Approach
-The project uses Python-based data processing and machine learning to estimate future medicine demand.
+The forecasting layer uses Python-based data processing and Random Forest Regression (scikit-learn).
 
-Current MVP
-The forecasting layer uses:
+Current MVP: Synthetic historical demand is generated per medicine based on its daily_usage, then the model predicts the next 7 days. Since the demo baseline has no real signal (only a time index against i.i.d. noise), predictions are near-constant — this is intentional and honest, not a bug.
 
-Python
-
-Pandas
-
-NumPy
-
-Scikit-learn
-
-Random Forest Regression
-
-The system generates demand predictions and compares them with current inventory to calculate recommended reorder quantities.
-
-Future improvement
-The forecasting model can be improved using real historical sales/inventory data with:
-
-Lag features
-
-Rolling averages
-
-Seasonal patterns
-
-Supplier lead time
-
-Historical demand trends
-
-Model evaluation using MAE/RMSE
-
-More advanced time-series models
+Future improvement: Feeding real historical sales data with lag features, rolling averages, seasonal patterns, and supplier lead times would produce meaningful forecasts. Model evaluation with MAE/RMSE/MAPE is planned.
 
 🏗️ System Architecture
 text
                  ┌──────────────────────┐
-                 │   React Dashboard     │
-                 │      Frontend         │
+                 │   React Dashboard    │
+                 │      Frontend        │
                  └──────────┬───────────┘
                             │
                             ▼
@@ -161,48 +155,24 @@ text
                  │        REST API      │
                  └──────────┬───────────┘
                             │
-                  ┌─────────┴─────────┐
-                  ▼                   ▼
-          ┌──────────────┐    ┌──────────────┐
-          │  Inventory   │    │  ML Forecast │
-          │    Data      │    │    Engine    │
-          └──────────────┘    └──────────────┘
-                  │                   │
-                  └─────────┬─────────┘
+         ┌──────────────────┼──────────────────┐
+         ▼                  ▼                  ▼
+  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐
+  │  Inventory  │   │  Beds &     │   │  Forecast   │
+  │    Data     │   │  Staff Data │   │   Engine    │
+  └─────────────┘   └─────────────┘   └─────────────┘
+         │                  │                  │
+         └──────────────────┼──────────────────┘
                             ▼
                  ┌──────────────────────┐
-                 │ Smart Recommendations│
+                 │ Risk Detection &     │
+                 │ Smart Redistribution │
                  └──────────────────────┘
 🛠️ Technology Stack
-Frontend
-
-React
-
-Vite
-
-CSS
-
-Backend
-
-Python
-
-FastAPI
-
-Uvicorn
-
-AI / Machine Learning
-
-Pandas
-
-NumPy
-
-Scikit-learn
-
-Random Forest Regression
-
-Data
-
-CSV-based inventory dataset for the MVP
+Frontend: React · Vite · CSS
+Backend: Python · FastAPI · Uvicorn
+AI / ML: Pandas · NumPy · Scikit-learn · Random Forest Regression
+Data: CSV-based datasets for the MVP (inventory.csv, beds.csv, staff.csv)
 
 📁 Project Structure
 text
@@ -214,7 +184,9 @@ MedGuard_AI_HackDevengers_MVP/
 │   │   └── main.py
 │   │
 │   ├── data/
-│   │   └── inventory.csv
+│   │   ├── inventory.csv
+│   │   ├── beds.csv
+│   │   └── staff.csv
 │   │
 │   └── requirements.txt
 │
@@ -236,20 +208,19 @@ bash
 git clone https://github.com/ankitjaiswal13-blip/MedGuard_AI_HackDevengers_MVP.git
 cd MedGuard_AI_HackDevengers_MVP
 🔧 Backend Setup
-Go to the backend directory:
-
 bash
 cd backend
-Create a virtual environment:
-
-bash
 python -m venv .venv
-Activate it.
+Activate the virtual environment:
 
-Windows PowerShell
+Windows PowerShell:
 
 powershell
 .venv\Scripts\Activate.ps1
+macOS / Linux:
+
+bash
+source .venv/bin/activate
 Install dependencies:
 
 bash
@@ -260,166 +231,104 @@ bash
 python -m uvicorn app.main:app --reload --port 8000
 Backend: http://127.0.0.1:8000
 
-API documentation: http://127.0.0.1:8000/docs
+API docs: http://127.0.0.1:8000/docs
 
 🎨 Frontend Setup
-Open another terminal.
-
-Go to the frontend:
+Open a second terminal:
 
 bash
 cd frontend
-Install dependencies:
-
-bash
 npm install
-Start the development server:
-
-bash
 npm run dev
 Frontend: http://localhost:5173/
 
+The Vite dev server proxies /api/* requests to the backend on port 8000, so no CORS configuration is needed during development.
+
 🔌 API Endpoints
-Health Check
-text
-GET /
-Checks whether the backend is running.
-
-Get Inventory
-text
-GET /api/inventory
-Returns medicine inventory information including risk and recommended order quantity.
-
-Get Summary
-text
-GET /api/summary
-Returns dashboard-level counts: total medicines, critical, high-risk, expiring within 30 days, and total units.
-
-Add Medicine
-text
-POST /api/inventory
-Adds a new medicine to the inventory.
-
-Example body:
-
+Endpoint	Method	Purpose
+/	GET	Health check
+/api/inventory	GET	Medicine inventory with risk + reorder (accepts ?facility_id=)
+/api/summary	GET	Dashboard summary counts (accepts ?facility_id=)
+/api/facilities	GET	List of facilities with aggregate counts
+/api/beds	GET	Bed occupancy per facility with status
+/api/staff	GET	Personnel attendance by facility and role
+/api/redistribution	GET	Cross-district transfer recommendations
+/api/forecast/{medicine}	GET	7-day demand forecast (accepts ?days= and ?facility_id=)
+/api/inventory	POST	Add a new medicine to the inventory
+Example — Add a medicine
 json
 {
-  "name": "Paracetamol",
-  "category": "Tablet",
-  "quantity": 100,
-  "daily_usage": 10,
-  "reorder_level": 20,
-  "expiry_date": "2027-12-31"
+  "facility_id": "PHC-001",
+  "facility_name": "Saket PHC",
+  "district": "South Delhi",
+  "name": "Paracetamol 500mg",
+  "category": "Analgesic",
+  "quantity": 120,
+  "daily_usage": 45,
+  "reorder_level": 100,
+  "expiry_date": "2027-02-15"
 }
-Get Forecast
-text
-GET /api/forecast/{medicine}?days=7
-Generates a demand forecast for the selected medicine.
+Example — Redistribution recommendation
+json
+{
+  "medicine": "Paracetamol 500mg",
+  "from_facility": "Rohini PHC",
+  "from_district": "North West Delhi",
+  "to_facility": "Dwarka PHC",
+  "to_district": "West Delhi",
+  "transfer_units": 255,
+  "reason": "Dwarka PHC has 0.9 days left; Rohini PHC has 26.7 days"
+}
+📊 Demo Scenario
+The sample data ships with three Delhi PHCs:
 
-Example:
-
-text
-/api/forecast/Paracetamol%20500mg?days=7
-📊 Example Output
-For a medicine such as Paracetamol:
-
-text
-Current Stock
-     ↓
-120 units
-
-Predicted 7-Day Demand
-     ↓
-183.5 units
-
-Recommended Order
-     ↓
-64 units
-This allows an inventory manager to take action before a stock-out occurs.
+Facility	District	Notable Status
+Saket PHC	South Delhi	Baseline stock, 93% bed occupancy
+Dwarka PHC	West Delhi	Critical Paracetamol (0.9 days), 50% doctor attendance
+Rohini PHC	North West Delhi	Surplus Paracetamol (26.7 days), full staffing
+The platform recommends transferring 255 units of Paracetamol from Rohini to Dwarka — a cross-district redistribution that no human would detect in real time.
 
 🎯 Target Users
-MedGuard AI can support:
+🏥 Government health departments managing PHC networks
 
-🏥 Hospitals
+💊 District health officers and supply chain coordinators
 
-💊 Pharmacies
+🏬 State-level health mission administrators (NHM equivalents)
 
-🏪 Medical stores
-
-🏬 Healthcare supply centers
-
-📦 Medical inventory managers
+📦 Medical inventory managers at facility level
 
 🌍 Potential Impact
-MedGuard AI aims to help healthcare organizations:
+Reduce stock-outs of essential medicines by forecasting demand ahead of time
 
-Reduce stock-out risk
+Reduce wastage from expiry by identifying surplus before it goes bad
 
-Reduce medicine wastage
+Improve coordination across districts through automated redistribution
 
-Improve inventory planning
+Give health administrators a single real-time view of medicines, beds, and staff
 
-Make faster inventory decisions
+Support emergency response with early warnings during outbreaks or disasters
 
-Better anticipate medicine demand
-
-Improve availability of essential medicines
+Enable federated learning across BRICS nations without sharing raw patient data
 
 🔮 Future Scope
-The MVP can be expanded with:
+Federated learning across BRICS — the forecasting model is designed to train locally per facility and share only gradients
 
-🗄️ Real Database
+Real-time streaming — replace CSV batch loads with Kafka/MQTT edge nodes per facility
 
-Move from CSV storage to:
+Patient footfall tracking — the remaining resource dimension named in the track brief
 
-PostgreSQL
+Real database — move from CSV to PostgreSQL / Supabase / Firebase
 
-Supabase
+Supplier intelligence — lead time, reliability, purchase price, minimum order quantity
 
-Firebase
+Advanced forecasting — lag features, seasonal patterns, MAE/RMSE/MAPE evaluation
 
-📈 Advanced Forecasting
+Optimization-based redistribution — allocate a limited surplus pool across multiple competing deficits instead of independent per-deficit recommendations
 
-Use real historical medicine demand data and evaluate models using:
-
-MAE
-
-RMSE
-
-MAPE
-
-🚚 Supplier Intelligence
-
-Consider:
-
-Supplier lead time
-
-Supplier reliability
-
-Purchase price
-
-Minimum order quantity
-
-🌐 Multi-Location Inventory
-
-Allow hospitals/pharmacies to manage inventory across multiple locations.
-
-🧠 AI Inventory Assistant
-
-Allow users to ask:
-
-Which medicines are at high stock-out risk?
-
-What should we reorder this week?
-
-Which medicines are approaching expiry?
+Map-based visualization — geographic view of the PHC network with live status overlay
 
 ⚠️ Disclaimer
-MedGuard AI is a hackathon prototype and inventory decision-support system.
-
-Its predictions should be validated against real operational inventory and demand data before being used in real healthcare operations.
-
-It is not intended to replace clinical judgment or professional healthcare decision-making.
+MedGuard AI is a hackathon prototype and inventory decision-support system. Its predictions should be validated against real operational inventory and demand data before being used in real healthcare operations. It is not intended to replace clinical judgment or professional healthcare decision-making.
 
 👥 Team
 Nexovate
@@ -428,14 +337,11 @@ Ankit Jaiswal
 
 Protistha Chowdhury
 
-Built for Hack Devengers 2.0
+Anurag Sanjay Mishra
 
 Repository: https://github.com/ankitjaiswal13-blip/MedGuard_AI_HackDevengers_MVP
-
-GitHub: https://github.com/ankitjaiswal13-blip
 
 ⭐ Project Vision
 Don't wait for medicines to run out. Predict what healthcare needs next.
 
 MedGuard AI — Predict. Prevent. Protect.
-
